@@ -15,10 +15,10 @@ int main()
 
     char name[51];
     char lastName[51];
-    float salary;
-    int sector;
-    int order;
-    int id;
+    float salary=0;
+    int sector=0;
+    int order=0;
+    int id=0;
     int flagEmpleadoExistente=0;
 
     initEmployees(empleados,TAM);

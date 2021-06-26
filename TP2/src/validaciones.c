@@ -190,7 +190,7 @@ int utn_getTelefono(char* mensaje, char* mensajeError, int minSize, int maxSize,
     int retorno=0;
     char bufferStr[maxSize];
 
-    if(mensaje!=NULL && mensajeError!=NULL && minSize<maxSize && reintentos>=0 && input!=NULL)
+    if(mensaje!=NULL && mensajeError!=NULL && minSize<maxSize && reintentos>=0 && (input!=NULL))
     {
         do
         {
@@ -202,7 +202,7 @@ int utn_getTelefono(char* mensaje, char* mensajeError, int minSize, int maxSize,
             }
             else
             {
-                printf("%sReintentos: %d\n",mensajeError,reintentos);
+                printf("%sMaximo de 21 caracteres. Reintentos: %d\n",mensajeError,reintentos);
                 reintentos--;
             }
         }while(reintentos>=0);
@@ -562,11 +562,7 @@ int isValidSignedNumber(char* stringRecibido)
 
 int validacionSexo(char sexo)
 {
-    char input;
-
-    input=tolower(sexo);
-
-    if((input=='f' || input=='m') && input!=NULL)
+    if((tolower(sexo)=='f' || tolower(sexo)=='m'))
     {
         return 1;
     }
@@ -582,7 +578,7 @@ int getSexo(char* mensaje,char* mensajeError,char* pSexo,int reintentos)
     fflush(stdin);
     scanf("%c",&sexo);
 
-    while(!validacionSexo(sexo) || sexo==NULL)
+    while(!validacionSexo(sexo))
     {
         printf("%sReintentos: %d\n",mensajeError,reintentos);
         printf(mensaje);
@@ -608,7 +604,7 @@ int anioActivo(int anio, int minimo, int maximo)
 {
     int retorno=0;
 
-    if(anio>minimo && anio<maximo && anio!=NULL)
+    if(anio>minimo && anio<maximo)
     {
         retorno=1;
     }
@@ -620,7 +616,7 @@ int mesActivo_30(int mes)
 {
     int retorno=0;
 
-    if((mes==4 || mes==6 || mes==9 || mes==11) && mes!=NULL)
+    if(mes==4 || mes==6 || mes==9 || mes==11)
     {
         retorno=1;
     }
@@ -632,7 +628,7 @@ int mesActivo_31(int mes)
 {
     int retorno=0;
 
-    if((mes==1 || mes==3 || mes==5 || mes==7 || mes==8 || mes==10 || mes==12) && mes!=NULL)
+    if(mes==1 || mes==3 || mes==5 || mes==7 || mes==8 || mes==10 || mes==12)
     {
         retorno=1;
     }
@@ -644,7 +640,7 @@ int diaActivo_30(int dia)
 {
     int retorno=0;
 
-    if(dia>0 && dia<=30 && dia!=NULL)
+    if(dia>0 && dia<=30)
     {
         retorno=1;
     }
@@ -656,7 +652,7 @@ int diaActivo_31(int dia)
 {
     int retorno=0;
 
-    if(dia>0 && dia<=31 && dia!=NULL)
+    if(dia>0 && dia<=31)
     {
         retorno=1;
     }
@@ -674,11 +670,11 @@ int validacionFecha(int dia, int mes, int anio, int minimo, int maximo)
         {
             retorno=1;
         }
-        else if(mesActivo_31(mes) && diaActivo_31(dia))
+        else if((mesActivo_31(mes)) && (diaActivo_31(dia)))
         {
             retorno=1;
         }
-        else if(mes==2 && dia>0 && dia<=29 && dia!=NULL)
+        else if(mes==2 && dia>0 && dia<=29)
         {
             retorno=1;
         }
@@ -697,7 +693,7 @@ int getFecha(char* mensaje,char* mensajeError,int* pDia, int* pMes, int* pAnio,i
     printf(mensaje);
     fflush(stdin);//En caso de ingresar un caracter
     scanf("%d/%d/%d",&dia,&mes,&anio);
-    while(!validacionFecha(dia,mes,anio,minimoAnio,maximoAnio) || anio==NULL)
+    while(!validacionFecha(dia,mes,anio,minimoAnio,maximoAnio))
     {
         printf("%s Formato (dd/mm/aaaa). Reintentos: %d\n",mensajeError,reintentos);
         printf(mensaje);
@@ -722,7 +718,7 @@ int getFecha(char* mensaje,char* mensajeError,int* pDia, int* pMes, int* pAnio,i
 //Edad
 int validacionEdad(int edad,int maximo)
 {
-    if(edad>0 && edad<maximo && edad!=NULL)
+    if(edad>0 && edad<maximo)
     {
         return 1;
     }
@@ -738,7 +734,7 @@ int getEdad(char* mensaje,char* mensajeError,int* pEdad,int maximo,int reintento
     fflush(stdin); // En caso de que se ingrese un caracter.
     scanf("%d",&edad);
 
-    while(!validacionEdad(edad,maximo) || edad==NULL)
+    while(!validacionEdad(edad,maximo))
         {
             printf("%sReintentos: %d\n",mensajeError,reintentos);
             printf(mensaje);
